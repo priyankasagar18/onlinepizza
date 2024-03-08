@@ -1,0 +1,56 @@
+<div class="signup-container p-[100px] w-1/3 ">
+    <h2>Sign Up</h2>
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
+        <div class="form-group">
+          <input type="text" id="UserName" name="UserName" class="form-control" ngModel required minlength="3" #UserName="ngModel" placeholder="Username">
+          <span *ngIf="UserName.invalid && (UserName.dirty || UserName.touched)">
+            <span style="color: red;"*ngIf="UserName.errors?.['required']">Username is required.</span>
+            <span style="color: red;"*ngIf="UserName.errors?.['minlength']">Username must be at least 3 characters long.</span>
+          </span>
+        </div>
+       
+        <div class="form-group">
+            <input type="email" id="UserEmail" name="UserEmail" ngModel required UserEmail #UserEmail="ngModel" placeholder="Email">
+            <span *ngIf="UserEmail.invalid && (UserEmail.dirty || UserEmail.touched)">
+              <span style="color: red;"*ngIf="UserEmail.errors?.['required']">Email is required.</span>
+              <span style="color: red;"*ngIf="UserEmail.errors?.['email']">Invalid email format.</span>
+            </span>
+        </div>
+       
+        <div class="form-group">
+            <input type="password" id="Password" name="Password" class="form-control" ngModel
+            required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$"
+            #Password="ngModel" placeholder="Password">
+            <span *ngIf="Password.invalid && (Password.dirty || Password.touched)">
+            <span style="color: red;" *ngIf="Password.errors?.['required']">Password is required.</span>
+            <span style="color: red;" *ngIf="Password.errors?.['minlength']">Password must be at least 8 characters long.</span>
+            <span style="color: red;" *ngIf="Password.errors?.['pattern']">
+                Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.
+            </span>
+            </span>
+        </div>
+       
+        <!-- <div class="form-group">
+            <div>
+          <label for="ConfirmPassword">Confirm Password:</label>
+          <input type="password" id="ConfirmPassword" name="ConfirmPassword" ngModel required minlength="8">
+        </div>
+        <div *ngIf="passwords.controls['Password'].value !== passwords.controls['ConfirmPassword'].value && passwords.controls['ConfirmPassword'].touched">
+          Passwords do not match.
+        </div>
+        </div> -->
+       
+        <div class="form-group">
+            <input type="tel" id="Phone" name="Phone" class="form-control" ngModel required minlength="10" maxlength="10" #Phone="ngModel" placeholder="Phone Number">
+            <span *ngIf="Phone.invalid && (Phone.dirty || Phone.touched)">
+              <span style="color: red;" *ngIf="Phone.errors?.['required']">Phone Number is required.</span>
+              <span style="color: red;" *ngIf="Phone.errors?.['minlength']">Phone Number must be at least 10 digits long.</span>
+              <span style="color: red;" *ngIf="Phone.errors?.['maxlength']">Phone Number can't exceed 10 digits.</span>
+            </span>
+        </div>
+       
+       
+        <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid" (click)="navigateLogin()">Sign Up</button>
+      </form>
+    </div>
+    
